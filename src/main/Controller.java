@@ -25,6 +25,9 @@ public class Controller {
     private Button clearButton;
 
     @FXML
+    private Button closingBracket;
+
+    @FXML
     private Button calculateButton;
 
     private String currentText;
@@ -78,10 +81,44 @@ public class Controller {
         calculatedTextField.setText(previousText);
         calculation.pushOperator(getOperator(op));
 
+        switch (op) {
+            case "e^"  :
+            case "sin" :
+            case "cos" :
+            case "tan" :
+            case "log" :    closingBracket.setDisable(false);
+                            calculatedTextField.setText( previousText+="(" );
+                            break;
+        }
+
         currentText = "";
         inputTextField.setText(currentText);
 
     }
+
+
+    @FXML
+    public void clsBrkt(ActionEvent event) {
+        ((Button)event.getSource()).setDisable(true);
+
+        try {
+            Double num = 0.0 ;
+            if (currentText.equals("π"))
+                num = Math.PI;
+            else
+                num = Double.parseDouble(currentText);
+
+            calculation.pushOperand(num);
+            previousText = previousText + currentText;
+        }
+        catch (Exception e) {
+            clearInputText();
+        }
+        calculatedTextField.setText( previousText+=")" );
+        clearInputText();
+
+    }
+
 
     private Operator getOperator(String string) {
         switch (string){
@@ -96,8 +133,8 @@ public class Controller {
             case "*" : return Operator.MULTIPLY;
             case "+" : return Operator.ADD;
             case "-" : return Operator.SUBTRACT;
-            case "(" : return Operator.OPNBKT;
-            case ")" : return Operator.CLSBKT;
+//            case "(" : return Operator.OPNBKT;
+//            case ")" : return Operator.CLSBKT;
         }
         return null;
     }
@@ -146,8 +183,7 @@ public class Controller {
             clearInputText();
         }
 
-
-        previousText = Double.toString(calculation.calculate(null));
+        previousText = Double.toString(calculation.calculate());
         calculatedTextField.setText(formatString(previousText) );
 
         currentText = "";
@@ -157,6 +193,14 @@ public class Controller {
     //Format this method to output correct string to ui
     private String formatString(String previousText) {
         return previousText;
+    }
+
+    private void setSelectableUNARY(boolean value) {
+
+    }
+
+    private void setSelectableBINARY(boolean value) {
+
     }
 
 

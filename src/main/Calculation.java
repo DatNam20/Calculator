@@ -20,21 +20,26 @@ public class Calculation {
     public Calculation() {
         operandStack = new Stack<>();
         operatorStack = new Stack<>();
-        operatorStack.push(Operator.OPNBKT);
+//        operatorStack.push(Operator.OPNBKT);
     }
 
 
     void pushOperand(double operand){
         operandStack.add(operand);
+        evaluate();
     }
 
     void pushOperator(Operator operator){
         operatorStack.add(operator);
+        evaluate();
     }
 
-    public double calculate(String exp){
-        exp = clean(exp);
-        evaluate(exp);
+    public double calculate(){
+//        input - String exp
+//        exp = clean(exp);
+//        evaluate(exp);
+
+        evaluate();
         if(!operatorStack.isEmpty()) {
             if (operatorStack.peek().equals(Operator.OPNBKT))
                 throw new RuntimeException("Wrong Expression : Mismatched Bracket");
@@ -59,20 +64,34 @@ public class Calculation {
     /*
     This method handles the evaluation of expression that is present in the stack
      */
-    private void evaluate(String exp){
+    private void evaluate(){
+//        input - String exp
+
         if (operatorStack.isEmpty()) return;
 
-        while(operatorStack.peek() != Operator.OPNBKT) {
-            if("BINARY".equals(getOperatorType(operatorStack.peek())) && operandStack.size()>=2){
-                double secNum = operandStack.pop();
-                double firstNum = operandStack.pop();
-                operandStack.push(getValue(operatorStack.pop(), firstNum, secNum));
-            }
-            else if("UNARY".equals(getOperatorType(operatorStack.peek())) && operandStack.size()>=1){
-                operandStack.push(getValue(operatorStack.pop(),operandStack.pop()));
-            }
+        if("UNARY".equals(getOperatorType(operatorStack.peek())) && operandStack.size()>=1) {
+            operandStack.push(getValue(operatorStack.pop(),operandStack.pop()));
         }
-        operatorStack.pop();
+        else if("BINARY".equals(getOperatorType(operatorStack.peek())) && operandStack.size()>=2) {
+            double secNum = operandStack.pop();
+            double firstNum = operandStack.pop();
+            operandStack.push(getValue(operatorStack.pop(), firstNum, secNum));
+        }
+
+
+//        if (operatorStack.isEmpty()) return;
+//
+//        while(operatorStack.peek() != Operator.OPNBKT) {
+//            if("BINARY".equals(getOperatorType(operatorStack.peek())) && operandStack.size()>=2){
+//                double secNum = operandStack.pop();
+//                double firstNum = operandStack.pop();
+//                operandStack.push(getValue(operatorStack.pop(), firstNum, secNum));
+//            }
+//            else if("UNARY".equals(getOperatorType(operatorStack.peek())) && operandStack.size()>=1){
+//                operandStack.push(getValue(operatorStack.pop(),operandStack.pop()));
+//            }
+//        }
+//        operatorStack.pop();
     }
 
     private String getOperatorType(Operator op){
@@ -132,18 +151,18 @@ public class Calculation {
     public void clearAll() {
         operandStack = new Stack<>();
         operatorStack = new Stack<>();
-        operatorStack.push(Operator.OPNBKT);
+//        operatorStack.push(Operator.OPNBKT);
     }
 
 
-    public static void main(String[] args){
+/*    public static void main(String[] args){
         Calculation calc = new Calculation();
         String exp = "3+4+5";
         System.out.println("Exp :" + exp);
         exp = calc.clean(exp);
         System.out.println("Cleaned Exp : " + exp);
     }
-
+*/
 
 
 }

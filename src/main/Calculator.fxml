@@ -117,12 +117,12 @@
          <font>
             <Font size="18.0" />
          </font></Button>
-      <Button alignment="CENTER" layoutY="215.0" mnemonicParsing="false" onAction="#operation" prefHeight="45.0" prefWidth="90.0" style="-fx-background-color: #BFCBA8;" text="(">
+      <Button alignment="CENTER" disable="true" layoutY="215.0" mnemonicParsing="false" onAction="#operation" prefHeight="45.0" prefWidth="90.0" style="-fx-background-color: #BFCBA8;" text="(">
          <font>
             <Font size="18.0" />
          </font>
       </Button>
-      <Button alignment="CENTER" layoutX="90.0" layoutY="215.0" mnemonicParsing="false" onAction="#operation" prefHeight="45.0" prefWidth="90.0" style="-fx-background-color: #BFCBA8;" text=")">
+      <Button fx:id="closingBracket" alignment="CENTER" disable="true" layoutX="90.0" layoutY="215.0" mnemonicParsing="false" onAction="#clsBrkt" prefHeight="45.0" prefWidth="90.0" style="-fx-background-color: #BFCBA8;" text=")">
          <font>
             <Font size="18.0" />
          </font>
