@@ -5,7 +5,7 @@ This is a basic scientific calculator application which can calculate simple sci
 ##Features
 
 * Can calculate arithmetic, logarithmic and trigonometric expressions.
-* Allows multiple values together.
+* Allows entry of multiple values.
 
 ## Screenshots
 ![Calculator Image 1](src/main/screenshots/SS1.png "Calculator Image")
